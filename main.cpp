@@ -13,14 +13,14 @@ const char *fragmentShaderSource;
 
 std::vector<float> objectsVertices = {
     // start of the bottom of the cup
-    0.0f, -0.5f, 0.0f,  // center
-    0.3f, -0.5f, 0.0f,  // right
+    0.0f,  -0.5f, 0.0f, // center
+    0.3f,  -0.5f, 0.0f, // right
     -0.3f, -0.5f, 0.0f, // left
 
     // start of top of the cup
-    0.0f, 5.0f, 0.0f, // center
-    0.4f, 0.0f, 0.0f, // right
-    -0.4f, 0.0f, 0.0f // left
+    //  0.0f, 5.0f, 0.0f, // center
+    //  0.4f, 0.0f, 0.0f, // right
+    // -0.4f, 0.0f, 0.0f // left
 };
 
 int main() {
@@ -42,22 +42,28 @@ int main() {
   // Make the window's context current
   glfwMakeContextCurrent(window);
 
+  // check to see if glew can init
+  if (glewInit() != GLEW_OK) {
+    std::cerr << "Faild to init GLEW\n";
+    glfwTerminate();
+    return -1;
+  }
   // shader compile
   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-  glCompileShader(vertexShader);
+  //  glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+  //  glCompileShader(vertexShader);
 
-  unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-  glCompileShader(vertexShader);
+  // unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+  // glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+  // glCompileShader(vertexShader);
 
   // shaderprogram  attach
-  unsigned int shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vertexShader);
-  glAttachShader(shaderProgram, fragmentShader);
+  // unsigned int shaderProgram = glCreateProgram();
+  // glAttachShader(shaderProgram, vertexShader);
+  // glAttachShader(shaderProgram, fragmentShader);
   // shader link
-  glLinkProgram(shaderProgram);
-  glUseProgram(shaderProgram);
+  // glLinkProgram(shaderProgram);
+  // glUseProgram(shaderProgram);
 
   // TODO: vertex arry and buffer intalization
 
@@ -77,9 +83,9 @@ int main() {
 
     glClear(GL_COLOR_BUFFER_BIT); // clearn color buffer
 
-    glUseProgram(shaderProgram); // sets the shader program
+    // glUseProgram(shaderProgram); // sets the shader program
 
-    //TODO: set the model matrix uniform for each object
+    // TODO: set the model matrix uniform for each object
 
     // Swap front and back buffers
     glfwSwapBuffers(window);
